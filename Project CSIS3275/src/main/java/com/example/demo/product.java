@@ -17,18 +17,18 @@ public class product {
 	Long id;
 	
 	String nameString;
-	Double price;
+	double price;
 	int NumberInStock;
 	String descriptionString;
 	double rating;
 	String specificationString;
-	List<String> reviews;
+	String[] reviews;
 	
 
 
     //product with name of product, price, number in stock, description, rating, specifications, reviews
-	public product(String nameString, Double price, int numberInStock, String descriptionString, double rating,
-			String specificationString, List<String> reviews) {
+	public product(String nameString, double price, int numberInStock, String descriptionString, double rating,
+			String specificationString, String[] reviews) {
 		super();
 		
 		this.nameString = nameString;
@@ -86,11 +86,11 @@ public class product {
 	}
 	
 	
-	public List<String> getReviews() {
+	public String[] getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<String> reviews) {
+	public void setReviews(String[] reviews) {
 		this.reviews = reviews;
 	}
 
