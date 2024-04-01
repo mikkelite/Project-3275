@@ -61,14 +61,14 @@ public class ProductController {
 	}
 	
 	@GetMapping("/products/{id}/reviews")
-	public ResponseEntity<List<String>> getProductReviews(@PathVariable long id) {
+	public ResponseEntity<String[]> getProductReviews(@PathVariable long id) {
 	    Optional<product> productOptional = productRepository.findById(id);
 	    if (productOptional.isEmpty()) {
 	        throw new ResourceNotFoundException("Product not found with ID: " + id);
 	    }
 
 	    product product = productOptional.get();
-	    List<String> reviews = product.getReviews();
+	    String[] reviews = product.getReviews();
 	    return ResponseEntity.ok(reviews);
 	}
 
