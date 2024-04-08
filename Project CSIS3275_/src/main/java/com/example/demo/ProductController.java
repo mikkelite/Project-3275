@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-
+@CrossOrigin("http://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class ProductController {
@@ -77,8 +79,13 @@ public class ProductController {
 	@PostMapping("/products")
 	public ResponseEntity<product> postMethodName(@RequestBody product product) 
 	{	
+		System.out.println(product);
 		productRepository.save(product);
 		return ResponseEntity.ok(product);
+	}
+	@DeleteMapping("/products/{id}")
+	public void deleteProduct(@PathVariable long id) {
+		productRepository.deleteById(id);
 	}
 	
 

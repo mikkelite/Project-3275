@@ -93,6 +93,9 @@ public class product {
 	public void setReviews(String[] reviews) {
 		this.reviews = reviews;
 	}
+	public product() {
+		
+	}
 
 	
 	
