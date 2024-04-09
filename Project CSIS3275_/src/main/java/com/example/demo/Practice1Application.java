@@ -8,16 +8,22 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+
+import User.User;
+import User.UserRepository;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.example.demo", "User"})
+
 public class Practice1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Practice1Application.class, args);
 	}
 	//creating products on load
-	@Bean
-	ApplicationRunner init(ProductRepository productRepository) {
+	
+	ApplicationRunner initProducts(ProductRepository productRepository) {
 		
 		List<String[]> productReviews = new ArrayList<>(Arrays.asList(
 				new String[]{"Great stopping power, minimal noise."},
@@ -60,8 +66,30 @@ public class Practice1Application {
 					    producSpec.get(i),
 					    productReviews.get(i)
 					     ));
-			}
+			}	
 		};
 	}
+	@Bean
+	ApplicationRunner initUsers(UserRepository userRepository) {
+		
+		return args -> {
+			List<User> users = initializedUsers();
+	        for (User user : users) {
+	            userRepository.save(new User(user.getfName(),user.getlName(),user.getRole()));
+	        }
+		};
+	
+	}
+	
+    public static List<User> initializedUsers() {
+        List<User> users = new ArrayList<>();
+        users.add(new User("Emerson", "Silva", "Admin"));
+        users.add(new User("Michael", "Felker", "Admin"));
+        users.add(new User("Rubani", "Rubani", "Admin"));
+        users.add(new User("Rafael", "Oliveira", "User"));
+        users.add(new User("Corey", "La", "User"));
+
+        return users;
+    }
 
 }
