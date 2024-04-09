@@ -1,4 +1,4 @@
-package User;
+package com.example.demo.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserClass {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +24,9 @@ public class User {
 	@Column(name = "role")
 	private String role;
 	
-	public User() {}
+	public UserClass() {}
 	
-	public User(String fName, String lName, String role) {
+	public UserClass(String fName, String lName, String role) {
 		this.fName = fName;
 		this.lName = lName;
 		this.role = role;
