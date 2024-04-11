@@ -20,24 +20,23 @@ public class LoginController {
 
 	@Autowired
 	UserRepository userRepo;
-
+	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User loginRequest) {
-
+	public ResponseEntity<?> login(@RequestBody User loginRequest){		
 		try {
 			Optional<User> userData = userRepo.findByEmail(loginRequest.getEmail());
 			if (userData.isPresent()) {
 				String password = userData.get().getPassword();
 				if (password.equals(loginRequest.getPassword())) {
 					MessageResponse msg = new MessageResponse("User Authenticated!");
-					return new ResponseEntity<>(msg, HttpStatus.OK);
+					return new ResponseEntity<>(msg,HttpStatus.OK);
 				}
 				MessageResponse msg = new MessageResponse("Incorrect password");
 				return new ResponseEntity<>(msg, HttpStatus.FORBIDDEN);
 			}
 			MessageResponse msg = new MessageResponse("User or password incorrect");
 			return new ResponseEntity<>(msg, HttpStatus.FORBIDDEN);
-		} catch (Exception e) {
+		}catch (Exception e) {
 			MessageResponse msg = new MessageResponse("Server Error");
 			return new ResponseEntity<>(msg, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
